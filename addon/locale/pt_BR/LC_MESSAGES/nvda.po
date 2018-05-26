@@ -1,0 +1,28 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: profileDictionary version 1.0-beta\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: NVDA User <email@address.com>\n"
+"Language-Team: NVDA users\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pt_BR\n"
+"X-Generator: Poedit 2.0.1\n"
+
+msgid ""
+"Shows the profile-specific dictionary dialog"
+msgstr ""
+"Exibe o diálogo do dicionário de perfis"
+
+msgid "You can not add a profile dictionary to the NVDA normal configuration."
+msgstr ""
+"Não é permitido associar dicionários de perfis a configuração normal do NVDA."
+
+msgid "Invalid Operation"
+msgstr "Operação Inválida"
+
+# , python-format
+msgid "Profile dictionary for %s"
+msgstr "Dicionário para %s"
