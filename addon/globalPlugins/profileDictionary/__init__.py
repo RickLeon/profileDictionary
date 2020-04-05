@@ -123,6 +123,13 @@ if not api.globalVars.appArgs.secure:
 
 class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 
+	def __init__(self):
+		super(globalPluginHandler.GlobalPlugin, self).__init__()
+		self.dictsMenu = gui.mainFrame.sysTrayIcon.preferencesMenu.GetMenuItems()[1].GetSubMenu()
+		# Translators: The label for the menu item to open profile-specific speech dictionary dialog.
+		self.appDictDialog = self.dictsMenu.Append(wx.ID_ANY, _("&Profile Dictionary..."), _("A dialog where you can set profile-specific dictionary entries"))
+		gui.mainFrame.sysTrayIcon.Bind(wx.EVT_MENU, self.script_editDict, self.appDictDialog)
+
 	def script_editDict(self, gesture):
 		if not api.globalVars.appArgs.secure:
 			if len(config.conf.profiles) <= 1:
