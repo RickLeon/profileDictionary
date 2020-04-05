@@ -9,12 +9,11 @@ import os
 from speechDictHandler import speechDictsPath
 
 try:
-	from globalCommands import SCRCAT_CONFIG
+	from globalCommands import SCRCAT_SPEECH
 except:
-	SCRCAT_CONFIG = None
+	SCRCAT_SPEECH = None
 
 addonHandler.initTranslation()
-
 
 # Temp dictionary use taken from emoticons add-on
 class ProfileDict(object):
@@ -76,7 +75,7 @@ def decorator(originalFunc, funcAfter):
 		return out
 	return funcWrapper
 
-def onProfileSwitch(conf):
+def onProfileSwitch():
 	setActiveDicts()
 
 def onDeleteProfile(conf, name):
@@ -90,8 +89,7 @@ def onRenameProfile(conf, oldName, newName):
 		dicts[newName] = dicts.pop(oldName)
 
 def addActions():
-# Consider calling config.configProfileSwitched instead of decorating the method
-	config.ConfigManager._handleProfileSwitch = decorator(config.ConfigManager._handleProfileSwitch, onProfileSwitch)
+	config.post_configProfileSwitch.register(onProfileSwitch)
 	config.ConfigManager.deleteProfile = decorator(config.ConfigManager.deleteProfile, onDeleteProfile)
 	config.ConfigManager.renameProfile = decorator(config.ConfigManager.renameProfile, onRenameProfile)
 
@@ -139,11 +137,11 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 			else:
 				profileDict.removeFromTempDict()
 			gui.mainFrame._popupSettingsDialog(ProfileDictDialog, _("Profile dictionary for %s") % profileName, profileDict)
-	script_editDict.category = SCRCAT_CONFIG
-	script_editDict.__doc__ = _("Shows the profile-specific dictionary dialog")
+	script_editDict.category = SCRCAT_SPEECH
+	script_editDict.__doc__ = _("Shows the dictionary dialog to insert entries valid only for the active profile.")
 
 	__gestures = {
-		"kb:NVDA+Shift+p": "editDict"
+		"kb:NVDA+Shift+p": "editDict",
 }
 
 
